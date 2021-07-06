@@ -1,0 +1,14 @@
+*.class
+
+*.jar
+*.war
+*.nar
+*.ear
+*.iml
+*.phd
+*.trc
+*.pom
+
+.idea/*
+out/*
+target/*
