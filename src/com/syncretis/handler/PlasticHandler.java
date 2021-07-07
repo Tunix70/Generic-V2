@@ -1,18 +1,22 @@
 package com.syncretis.handler;
 
-public class PlasticHandler implements MainHandler {
-    private final double mass;
+import com.syncretis.Model.Material;
+import com.syncretis.productContainer.RecyclableMaterialContainer;
 
-    public PlasticHandler(double mass) {
-        this.mass = mass;
-    }
+public class PlasticHandler extends Handler{
+    RecyclableMaterialContainer<? extends Material> container;
 
-    public double getMass() {
-        return mass;
+    public PlasticHandler(RecyclableMaterialContainer<? extends Material> container) {
+        this.container = container;
     }
 
     @Override
-    public void printMass() {
-        System.out.println("After handler mass is= " + getMass());
+    public void handle() {
+        System.out.println(container.getMass());
+    }
+
+    @Override
+    public Class getType() {
+        return container.getType();
     }
 }

@@ -1,25 +1,41 @@
 package com.syncretis;
 
 import com.syncretis.Model.Glass;
+import com.syncretis.Model.Material;
 import com.syncretis.Model.Paper;
 import com.syncretis.Model.Plastic;
-import com.syncretis.handler.MainHandler;
+import com.syncretis.handler.GlassHandler;
+import com.syncretis.handler.Handler;
+import com.syncretis.handler.PaperHandler;
+import com.syncretis.handler.PlasticHandler;
 import com.syncretis.productContainer.RecyclableMaterialContainer;
+import com.syncretis.resolver.HandlerResolver;
 import com.syncretis.resolver.Resolver;
-import com.syncretis.resolver.ResolverContainer;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Main {
 
     public static void main(String[] args) {
         RecyclableMaterialContainer<Glass> glassMat = new RecyclableMaterialContainer<>(400, Glass.class);
-        RecyclableMaterialContainer<Paper> paperFirst = new RecyclableMaterialContainer<>(200, Paper.class);
-        RecyclableMaterialContainer<Plastic> plasticFirst = new RecyclableMaterialContainer<>(500, Plastic.class);
-        RecyclableMaterialContainer<Paper> paperSecond = new RecyclableMaterialContainer<>(900, Paper.class);
-        RecyclableMaterialContainer<Plastic> plasticSecond = new RecyclableMaterialContainer<>(1500, Plastic.class);
+        RecyclableMaterialContainer<Plastic> plasticMat = new RecyclableMaterialContainer<>(500, Plastic.class);
+        RecyclableMaterialContainer<Paper> paperMat = new RecyclableMaterialContainer<>(900, Paper.class);
 
-        Resolver resolverContainer = new ResolverContainer();
-        MainHandler mainHandler = resolverContainer.transmitHandler(paperSecond);
-        mainHandler.printMass();
+        GlassHandler glassHandler = new GlassHandler(glassMat);
+        PaperHandler paperHandler = new PaperHandler(paperMat);
+        PlasticHandler plasticHandler = new PlasticHandler(plasticMat);
+
+
+        List<Handler<? extends Material>> handlers = new ArrayList<>();
+        handlers.add(glassHandler);
+        handlers.add(paperHandler);
+        handlers.add(plasticHandler);
+
+        Resolver resolver = new HandlerResolver(handlers);
+        Handler glassHendler = resolver.getHandler(Paper.class);
+
+        glassHendler.handle();
 
     }
 }

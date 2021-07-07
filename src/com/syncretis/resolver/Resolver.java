@@ -1,9 +1,8 @@
 package com.syncretis.resolver;
 
 import com.syncretis.Model.Material;
-import com.syncretis.handler.MainHandler;
-import com.syncretis.productContainer.RecyclableMaterialContainer;
+import com.syncretis.handler.Handler;
 
 public interface Resolver {
-    MainHandler transmitHandler(RecyclableMaterialContainer<? extends Material> container);
+    Handler<? extends Material> getHandler(Class<? extends Material> type);
 }
