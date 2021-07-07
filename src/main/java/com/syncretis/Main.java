@@ -1,9 +1,9 @@
 package com.syncretis;
 
-import com.syncretis.Model.Glass;
-import com.syncretis.Model.Material;
-import com.syncretis.Model.Paper;
-import com.syncretis.Model.Plastic;
+import com.syncretis.model.Glass;
+import com.syncretis.model.Material;
+import com.syncretis.model.Paper;
+import com.syncretis.model.Plastic;
 import com.syncretis.handler.GlassHandler;
 import com.syncretis.handler.Handler;
 import com.syncretis.handler.PaperHandler;
